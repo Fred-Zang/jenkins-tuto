@@ -1,0 +1,38 @@
+"""
+Tout ceci se fait dans le navigateur Jenkins
+"""
+
+""" Build """
+# créer un rép. de travail temporaire -p=idempotant si existe, nom du rép= xavki
+mkdir -p /tmp/xavki/
+# éliminer le contenu du rép. xavki 
+# => pour gérer notre ens. d'occurences qu'on va répéter dans nos 3 build-run-test
+rm -rf /tmp/xavki/*
+# créer un fichier Main.java avec un "hello world"    en java
+# puis envoie par > en Main.java
+echo '
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}
+'  >/tmp/xavki/Main.java
+# compilation par javac  (c=compile)
+javac /tmp/xavki/Main.java
+
+""" Run """
+# lancement de java avec écriture du résultat dans un fichier test.file
+# attention dépendance avec le build ici
+cd /tmp/xavki/
+# lancer le fichier java Main => résultat dans test.file
+java Main >test.file
+
+
+""" Test """
+# dépendant du déclenchement du RUN ici
+# un principe
+# on affiche le contenu du fichier test.file (on pourrait faire des tests dessus)
+
+cd /tmp/xavki/
+echo "###### contenu du test.file ######"
+cat test.file
