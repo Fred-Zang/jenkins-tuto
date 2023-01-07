@@ -36,3 +36,5 @@ java Main >test.file
 cd /tmp/xavki/
 echo "###### contenu du test.file ######"
 cat test.file
+
+# ajout de cette ligne pour activer un remote sur dépot github
